@@ -9,8 +9,6 @@ about:
       href: https://github.com/ir-handong
 ---
 
-## IR Handong
+## IR
 
-한동대학교 기관연구(IR) 데이터 분석 블로그입니다.
-
-R, Python 등을 활용한 데이터 분석 방법론과 대학 행정 데이터 활용 사례를 공유합니다.
+R, Python 등을 활용한 데이터 분석 방법론과 활용 사례를 공유합니다.
