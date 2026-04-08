@@ -32,38 +32,9 @@ h1, h2, h3, h4, h5, h6 {
   color: #1a1a2e;
 }
 
-/* --- Navbar --- */
-.navbar {
-  background-color: #6c757d !important;
-  border-bottom: none;
-  padding: 0.8rem 1rem;
-}
+/* --- Navbar: flatly 테마 기본값 사용 --- */
 
-.navbar-brand {
-  font-weight: 800;
-  font-size: 1.25rem;
-  letter-spacing: -0.02em;
-  color: #ffffff !important;
-}
-
-.navbar-dark .navbar-nav .nav-link {
-  color: rgba(255, 255, 255, 0.85) !important;
-}
-
-.navbar-dark .navbar-nav .nav-link:hover {
-  color: #ffffff !important;
-}
-
-/* --- Homepage Title --- */
-.quarto-title-banner {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
-  padding: 0.6rem 0 !important;
-}
-
-.quarto-title-banner .title {
-  font-size: 2.2rem !important;
-  font-weight: 800 !important;
-}
+/* --- Homepage Title: 기본값 사용 --- */
 
 /* --- Post Cards --- */
 .quarto-grid-item {
