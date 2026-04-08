@@ -1,0 +1,322 @@
+---
+title: "R 자료구조 완전 정복: 벡터, 행렬, 데이터프레임, 리스트"
+author: "ir-handong"
+date: "2026-04-08"
+categories: [R, 프로그래밍]
+description: "R의 핵심 자료구조 4가지를 예제와 함께 정리합니다"
+---
+
+## R의 자료구조 개요
+
+R에는 크게 **4가지 핵심 자료구조**가 있습니다.
+
+| 자료구조 | 차원 | 데이터 타입 | 생성 함수 |
+|----------|------|------------|-----------|
+| 벡터(Vector) | 1차원 | 동일 | `c()` |
+| 행렬(Matrix) | 2차원 | 동일 | `matrix()` |
+| 데이터프레임(Data Frame) | 2차원 | 혼합 가능 | `data.frame()` |
+| 리스트(List) | 1차원 | 혼합 가능 | `list()` |
+
+## 1. 벡터 (Vector)
+
+R에서 가장 기본적인 자료구조입니다. **같은 타입**의 값들을 하나로 묶습니다.
+
+### 벡터 생성
+
+```{r}
+# 숫자형 벡터
+nums <- c(1, 2, 3, 4, 5)
+nums
+
+# 문자형 벡터
+names <- c("김철수", "이영희", "박민수")
+names
+
+# 논리형 벡터
+flags <- c(TRUE, FALSE, TRUE, TRUE)
+flags
+
+# 연속 숫자
+seq_vec <- 1:10
+seq_vec
+
+# 일정 간격
+seq(from = 0, to = 1, by = 0.2)
+
+# 반복
+rep(c("A", "B"), times = 3)
+rep(c("A", "B"), each = 3)
+```
+
+### 벡터 인덱싱
+
+```{r}
+x <- c(10, 20, 30, 40, 50)
+
+x[1]          # 첫 번째 원소
+x[c(1, 3)]   # 1, 3번째
+x[-2]         # 2번째 제외
+x[x > 25]    # 조건 필터링
+```
+
+### 벡터 연산
+
+```{r}
+a <- c(1, 2, 3)
+b <- c(10, 20, 30)
+
+a + b     # 원소별 덧셈
+a * b     # 원소별 곱셈
+sum(a)    # 합계
+mean(b)   # 평균
+length(a) # 길이
+```
+
+### 타입 변환
+
+벡터에 서로 다른 타입을 넣으면 **자동 변환**됩니다.
+
+```{r}
+# 숫자 + 문자 → 문자
+mixed <- c(1, "hello", 3)
+mixed
+class(mixed)
+
+# 논리 + 숫자 → 숫자 (TRUE=1, FALSE=0)
+mixed2 <- c(TRUE, FALSE, 3)
+mixed2
+class(mixed2)
+```
+
+## 2. 행렬 (Matrix)
+
+**2차원** 자료구조로, 벡터와 마찬가지로 **같은 타입**만 저장합니다.
+
+### 행렬 생성
+
+```{r}
+# 3행 4열 행렬
+mat <- matrix(1:12, nrow = 3, ncol = 4)
+mat
+
+# 행 방향으로 채우기
+matrix(1:12, nrow = 3, byrow = TRUE)
+
+# 행/열 이름 지정
+mat2 <- matrix(
+  c(85, 90, 78, 92, 88, 95),
+  nrow = 2,
+  dimnames = list(
+    c("중간고사", "기말고사"),
+    c("국어", "영어", "수학")
+  )
+)
+mat2
+```
+
+### 행렬 인덱싱
+
+```{r}
+mat <- matrix(1:12, nrow = 3)
+
+mat[1, ]     # 1행 전체
+mat[, 2]     # 2열 전체
+mat[1, 3]    # 1행 3열
+mat[1:2, ]   # 1~2행
+```
+
+### 행렬 연산
+
+```{r}
+mat <- matrix(1:4, nrow = 2)
+
+mat * 2          # 스칼라 곱
+t(mat)           # 전치
+mat %*% mat      # 행렬 곱
+dim(mat)         # 차원 확인
+nrow(mat)        # 행 수
+ncol(mat)        # 열 수
+
+rowSums(mat)     # 행별 합계
+colMeans(mat)    # 열별 평균
+```
+
+## 3. 데이터프레임 (Data Frame)
+
+실무에서 **가장 많이 사용**하는 자료구조입니다. 엑셀 시트와 비슷하며, 각 열이 **서로 다른 타입**을 가질 수 있습니다.
+
+### 데이터프레임 생성
+
+```{r}
+students <- data.frame(
+  이름 = c("김철수", "이영희", "박민수", "정수진"),
+  학년 = c(1, 2, 3, 2),
+  성적 = c(85, 92, 78, 95),
+  합격 = c(TRUE, TRUE, FALSE, TRUE)
+)
+students
+```
+
+### 구조 확인
+
+```{r}
+str(students)     # 구조
+dim(students)     # 행/열 수
+nrow(students)    # 행 수
+ncol(students)    # 열 수
+names(students)   # 열 이름
+head(students, 2) # 앞 2행
+summary(students) # 기초 통계
+```
+
+### 데이터 접근
+
+```{r}
+# 열 접근
+students$이름
+students[, "성적"]
+students[["학년"]]
+
+# 행 접근
+students[1, ]       # 1행
+students[c(1,3), ]  # 1, 3행
+
+# 조건 필터링
+students[students$성적 >= 90, ]
+students[students$합격 == TRUE, "이름"]
+```
+
+### 열 추가/수정/삭제
+
+```{r}
+# 열 추가
+students$등급 <- ifelse(students$성적 >= 90, "A", "B")
+students
+
+# 열 수정
+students$학년 <- students$학년 + 1
+students
+
+# 열 삭제
+students$등급 <- NULL
+students
+```
+
+### 행 추가
+
+```{r}
+new_student <- data.frame(
+  이름 = "최동훈",
+  학년 = 2,
+  성적 = 88,
+  합격 = TRUE
+)
+students <- rbind(students, new_student)
+students
+```
+
+## 4. 리스트 (List)
+
+**서로 다른 타입과 길이**의 데이터를 하나로 묶을 수 있는 가장 유연한 자료구조입니다.
+
+### 리스트 생성
+
+```{r}
+student_info <- list(
+  이름 = "김철수",
+  성적 = c(85, 90, 78),
+  수강과목 = c("통계학", "프로그래밍", "선형대수"),
+  졸업여부 = FALSE
+)
+student_info
+```
+
+### 리스트 접근
+
+```{r}
+# [[ ]] 또는 $로 원소 접근
+student_info$이름
+student_info[["성적"]]
+student_info[[2]]
+
+# [ ]는 서브리스트 반환 (주의!)
+class(student_info[2])    # list
+class(student_info[[2]])  # numeric
+```
+
+### 리스트 수정
+
+```{r}
+# 원소 추가
+student_info$학번 <- "2024001"
+
+# 원소 삭제
+student_info$졸업여부 <- NULL
+
+# 구조 확인
+str(student_info)
+```
+
+### 리스트 활용 예시
+
+```{r}
+# 여러 분석 결과를 하나로 묶기
+result <- list(
+  모델명 = "단순 회귀",
+  계수 = c(절편 = 2.5, 기울기 = 1.3),
+  R_squared = 0.87,
+  잔차 = c(0.1, -0.3, 0.2, -0.1)
+)
+result
+
+# 결과 꺼내기
+sprintf("R² = %.2f", result$R_squared)
+```
+
+## 5. 팩터 (Factor)
+
+범주형 데이터를 표현하는 특수한 자료구조입니다.
+
+```{r}
+# 팩터 생성
+blood <- factor(c("A", "B", "O", "AB", "A", "O", "B", "A"))
+blood
+levels(blood)
+table(blood)
+
+# 순서형 팩터
+grade <- factor(
+  c("상", "중", "하", "상", "중"),
+  levels = c("하", "중", "상"),
+  ordered = TRUE
+)
+grade
+grade[1] > grade[3]  # 비교 가능
+```
+
+## 자료구조 변환
+
+```{r}
+# 벡터 → 행렬
+vec <- 1:6
+as.matrix(vec)
+matrix(vec, nrow = 2)
+
+# 행렬 → 데이터프레임
+mat <- matrix(1:6, nrow = 2, dimnames = list(NULL, c("a", "b", "c")))
+as.data.frame(mat)
+
+# 리스트 → 데이터프레임 (같은 길이일 때)
+lst <- list(x = 1:3, y = c("a", "b", "c"))
+as.data.frame(lst)
+```
+
+## 한눈에 비교
+
+| | 벡터 | 행렬 | 데이터프레임 | 리스트 |
+|---|---|---|---|---|
+| **차원** | 1D | 2D | 2D | 1D |
+| **타입** | 동일 | 동일 | 열마다 다름 | 전부 다름 |
+| **생성** | `c()` | `matrix()` | `data.frame()` | `list()` |
+| **접근** | `x[1]` | `m[1,2]` | `df$col` | `l[[1]]` |
+| **용도** | 단일 변수 | 수학 연산 | 테이블 데이터 | 복합 데이터 |

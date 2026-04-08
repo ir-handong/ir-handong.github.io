@@ -2,7 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/r-apply-functions/index.html"
+      "/posts/r-apply-functions/index.html",
+      "/posts/r-data-structures/index.html"
     ]
   }
 ]
