@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/latent-profile-analysis/index.html",
       "/posts/logistic-regression/index.html",
       "/posts/r-apply-functions/index.html",
       "/posts/r-data-structures/index.html"

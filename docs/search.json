@@ -147,6 +147,13 @@
     "text": "선형 회귀 vs 로지스틱 회귀\n\n\n\n\n선형 회귀\n로지스틱 회귀\n\n\n\n\n종속변수\n연속형\n범주형 (0/1)\n\n\n함수\nlm()\nglm(family=binomial)\n\n\n출력\n예측값\n확률 (0~1)\n\n\n손실함수\nMSE\nLog Loss\n\n\n해석\n기울기 = 변화량\n오즈비 = 변화 배율\n\n\n예시\n매출 예측\n이탈 예측"
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "IR Handong",
+    "section": "",
+    "text": "R로 배우는 잠재 프로파일 분석(LPA) 완전 가이드\n\n\n\nR\n\n통계\n\n잠재변수모형\n\n\n\ntidyLPA 패키지를 활용한 잠재 프로파일 분석의 이론과 실습\n\n\n\n2026.04.08\n\n\n\n\n\n\n\n\n\n\nR로 배우는 로지스틱 회귀분석 완전 가이드\n\n\n\nR\n\n통계\n\n머신러닝\n\n\n\n이진 분류의 핵심, 로지스틱 회귀를 R 실습과 함께 처음부터 끝까지 정리합니다\n\n\n\n2026.04.08\n\n\n\n\n\n\n\n\n\n\nR의 apply 함수 패밀리 완전 정복\n\n\n\nR\n\n프로그래밍\n\n\n\napply, sapply, lapply, tapply, mapply의 차이점과 활용법\n\n\n\n2026.04.08\n\n\n\n\n\n\n\n\n\n\nR 자료구조 완전 정복: 벡터, 행렬, 데이터프레임, 리스트\n\n\n\nR\n\n프로그래밍\n\n\n\nR의 핵심 자료구조 4가지를 예제와 함께 정리합니다\n\n\n\n2026.04.08\n\n\n\n\n\n\n일치 없음"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "소개",
@@ -161,11 +168,67 @@
     "text": "한동대학교 기관연구(IR) 데이터 분석 블로그입니다.\nR, Python 등을 활용한 데이터 분석 방법론과 대학 행정 데이터 활용 사례를 공유합니다."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "IR Handong",
+    "objectID": "posts/latent-profile-analysis/index.html",
+    "href": "posts/latent-profile-analysis/index.html",
+    "title": "R로 배우는 잠재 프로파일 분석(LPA) 완전 가이드",
     "section": "",
-    "text": "R로 배우는 로지스틱 회귀분석 완전 가이드\n\n\n\nR\n\n통계\n\n머신러닝\n\n\n\n이진 분류의 핵심, 로지스틱 회귀를 R 실습과 함께 처음부터 끝까지 정리합니다\n\n\n\n2026.04.08\n\n\n\n\n\n\n\n\n\n\nR의 apply 함수 패밀리 완전 정복\n\n\n\nR\n\n프로그래밍\n\n\n\napply, sapply, lapply, tapply, mapply의 차이점과 활용법\n\n\n\n2026.04.08\n\n\n\n\n\n\n\n\n\n\nR 자료구조 완전 정복: 벡터, 행렬, 데이터프레임, 리스트\n\n\n\nR\n\n프로그래밍\n\n\n\nR의 핵심 자료구조 4가지를 예제와 함께 정리합니다\n\n\n\n2026.04.08\n\n\n\n\n\n\n일치 없음"
+    "text": "잠재 프로파일 분석(Latent Profile Analysis, LPA)은 관측된 연속형 변수들의 패턴을 기반으로 응답자를 잠재적인 하위 집단(프로파일)으로 분류하는 혼합 모형(mixture model)입니다.\n\n\n\n학생들의 학습 유형 분류\n소비자 세그먼트 도출\n직원 직무만족 프로파일 분석\n환자의 증상 패턴 군집화\n\n\n\n\n\n\n\n\nLPA\nK-means\n\n\n\n\n분류 방식\n확률 기반 (소프트 분류)\n거리 기반 (하드 분류)\n\n\n결과\n각 프로파일 소속 확률\n하나의 군집에 할당\n\n\n모형 적합도\nBIC, AIC 등 통계적 지표\n실루엣, 엘보우 등\n\n\n가정\n정규 혼합 분포\n구형 군집\n\n\n유연성\n분산/공분산 구조 선택 가능\n제한적"
+  },
+  {
+    "objectID": "posts/latent-profile-analysis/index.html#잠재-프로파일-분석lpa이란",
+    "href": "posts/latent-profile-analysis/index.html#잠재-프로파일-분석lpa이란",
+    "title": "R로 배우는 잠재 프로파일 분석(LPA) 완전 가이드",
+    "section": "",
+    "text": "잠재 프로파일 분석(Latent Profile Analysis, LPA)은 관측된 연속형 변수들의 패턴을 기반으로 응답자를 잠재적인 하위 집단(프로파일)으로 분류하는 혼합 모형(mixture model)입니다.\n\n\n\n학생들의 학습 유형 분류\n소비자 세그먼트 도출\n직원 직무만족 프로파일 분석\n환자의 증상 패턴 군집화\n\n\n\n\n\n\n\n\nLPA\nK-means\n\n\n\n\n분류 방식\n확률 기반 (소프트 분류)\n거리 기반 (하드 분류)\n\n\n결과\n각 프로파일 소속 확률\n하나의 군집에 할당\n\n\n모형 적합도\nBIC, AIC 등 통계적 지표\n실루엣, 엘보우 등\n\n\n가정\n정규 혼합 분포\n구형 군집\n\n\n유연성\n분산/공분산 구조 선택 가능\n제한적"
+  },
+  {
+    "objectID": "posts/latent-profile-analysis/index.html#분석-준비",
+    "href": "posts/latent-profile-analysis/index.html#분석-준비",
+    "title": "R로 배우는 잠재 프로파일 분석(LPA) 완전 가이드",
+    "section": "분석 준비",
+    "text": "분석 준비\n\n패키지 설치 및 로드\n\nif (!require(\"tidyLPA\")) install.packages(\"tidyLPA\", quiet = TRUE)\nif (!require(\"dplyr\")) install.packages(\"dplyr\", quiet = TRUE)\nif (!require(\"tidyr\")) install.packages(\"tidyr\", quiet = TRUE)\n\nlibrary(tidyLPA)\nlibrary(dplyr)\nlibrary(tidyr)\n\n\n\n예제 데이터 생성\n대학생 300명의 학습 관련 변수 4개를 시뮬레이션합니다.\n\nset.seed(2026)\n\n# 프로파일 1: 성실형 (높은 학습시간, 높은 출석, 높은 과제, 보통 참여)\nn1 &lt;- 100\np1 &lt;- data.frame(\n  학습시간 = rnorm(n1, 7, 1),\n  출석률 = rnorm(n1, 90, 5),\n  과제점수 = rnorm(n1, 85, 8),\n  수업참여 = rnorm(n1, 70, 10)\n)\n\n# 프로파일 2: 소극형 (낮은 전반)\nn2 &lt;- 120\np2 &lt;- data.frame(\n  학습시간 = rnorm(n2, 3, 1.2),\n  출석률 = rnorm(n2, 65, 10),\n  과제점수 = rnorm(n2, 55, 12),\n  수업참여 = rnorm(n2, 40, 12)\n)\n\n# 프로파일 3: 전략형 (보통 학습시간, 높은 참여, 높은 과제)\nn3 &lt;- 80\np3 &lt;- data.frame(\n  학습시간 = rnorm(n3, 5, 1),\n  출석률 = rnorm(n3, 78, 8),\n  과제점수 = rnorm(n3, 80, 10),\n  수업참여 = rnorm(n3, 85, 8)\n)\n\nstudents &lt;- rbind(p1, p2, p3)\nhead(students, 10)\n\n   학습시간   출석률 과제점수 수업참여\n1  7.520589 96.08133 81.54379 68.51408\n2  5.920309 87.53078 88.66873 68.17047\n3  7.139238 88.86108 83.16518 61.41852\n4  6.915251 84.44176 70.14430 79.58159\n5  6.333360 94.97917 82.68261 61.60923\n6  4.483911 92.80914 99.13713 62.40276\n7  6.264853 82.17861 81.45854 61.33485\n8  5.979878 97.40539 80.28908 86.59026\n9  7.113554 84.15397 84.03529 75.56942\n10 6.526209 84.73993 98.22449 76.01386\n\nsummary(students)\n\n    학습시간            출석률          과제점수         수업참여      \n Min.   :-0.01538   Min.   : 46.35   Min.   : 23.76   Min.   :  3.423  \n 1st Qu.: 3.53218   1st Qu.: 67.45   1st Qu.: 58.43   1st Qu.: 42.824  \n Median : 4.90572   Median : 77.98   Median : 76.09   Median : 63.649  \n Mean   : 4.89291   Mean   : 77.31   Mean   : 71.69   Mean   : 61.735  \n 3rd Qu.: 6.33882   3rd Qu.: 88.34   3rd Qu.: 84.35   3rd Qu.: 80.925  \n Max.   : 9.41445   Max.   :103.19   Max.   :102.29   Max.   :104.683  \n\n\n\n\n변수 표준화\nLPA는 변수 간 스케일이 다르면 결과에 영향을 미치므로 표준화가 권장됩니다.\n\nstudents_scaled &lt;- students %&gt;%\n  mutate(across(everything(), scale)) %&gt;%\n  mutate(across(everything(), as.numeric))\n\nhead(students_scaled)\n\n    학습시간    출석률    과제점수    수업참여\n1  1.3346201 1.4495471  0.57578293  0.30389912\n2  0.5218259 0.7893993  0.99215469  0.28849464\n3  1.1409291 0.8921050  0.67053504 -0.01420682\n4  1.0271644 0.5509099 -0.09038749  0.80007457\n5  0.7316177 1.3644540  0.64233387 -0.00565701\n6 -0.2077315 1.1969168  1.60391372  0.02991814"
+  },
+  {
+    "objectID": "posts/latent-profile-analysis/index.html#모형-적합-프로파일-수-결정",
+    "href": "posts/latent-profile-analysis/index.html#모형-적합-프로파일-수-결정",
+    "title": "R로 배우는 잠재 프로파일 분석(LPA) 완전 가이드",
+    "section": "모형 적합: 프로파일 수 결정",
+    "text": "모형 적합: 프로파일 수 결정\nLPA에서 가장 중요한 단계는 최적 프로파일 수를 결정하는 것입니다.\n\n2~6개 프로파일 비교\n\nfit_results &lt;- students_scaled %&gt;%\n  estimate_profiles(2:6)\n\nfit_stats &lt;- get_fit(fit_results)\nfit_stats[, c(\"Classes\", \"LogLik\", \"AIC\", \"BIC\", \"Entropy\", \"n_min\", \"BLRT_p\")]\n\n# A tibble: 5 × 7\n  Classes LogLik   AIC   BIC Entropy  n_min  BLRT_p\n    &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;\n1       2 -1332. 2690. 2738.   0.982 0.393  0.00990\n2       3 -1272. 2580. 2646.   0.901 0.25   0.00990\n3       4 -1262. 2571. 2656.   0.820 0.177  0.00990\n4       5 -1262. 2581. 2684.   0.692 0.103  1      \n5       6 -1255. 2575. 2698.   0.753 0.0533 0.109  \n\n\n\n\n적합도 지표 해석\n\n\n\n지표\n기준\n\n\n\n\nAIC / BIC\n낮을수록 좋음. BIC를 더 많이 사용\n\n\nEntropy\n0~1 사이. 0.8 이상이면 분류 정확도 높음\n\n\nBLRT p-value\n유의하면(&lt; .05) 프로파일 수 증가가 정당화됨\n\n\nn_min\n가장 작은 프로파일의 비율. 너무 작으면(&lt; 5%) 불안정\n\n\n\n\n\n적합도 시각화\n\n# BIC 비교\nbarplot(fit_stats$BIC, names.arg = fit_stats$Classes,\n        col = \"#0f3460\", border = NA,\n        main = \"프로파일 수별 BIC\",\n        xlab = \"프로파일 수\", ylab = \"BIC\", las = 1)\n\n\n\n\n\n\n\n\n\n# Entropy 비교\nbarplot(fit_stats$Entropy, names.arg = fit_stats$Classes,\n        col = \"#28a745\", border = NA,\n        main = \"프로파일 수별 Entropy\",\n        xlab = \"프로파일 수\", ylab = \"Entropy\", las = 1,\n        ylim = c(0, 1))\nabline(h = 0.8, lty = 2, col = \"red\")"
+  },
+  {
+    "objectID": "posts/latent-profile-analysis/index.html#최적-모형-선택-및-해석",
+    "href": "posts/latent-profile-analysis/index.html#최적-모형-선택-및-해석",
+    "title": "R로 배우는 잠재 프로파일 분석(LPA) 완전 가이드",
+    "section": "최적 모형 선택 및 해석",
+    "text": "최적 모형 선택 및 해석\nBIC가 가장 낮고 Entropy가 높은 모형을 선택합니다.\n\n# 3-프로파일 모형 적합\nbest_model &lt;- students_scaled %&gt;%\n  estimate_profiles(3)\n\n# 프로파일 소속 결과\nresults &lt;- get_data(best_model)\nhead(results[, c(\"학습시간\", \"출석률\", \"과제점수\", \"수업참여\", \"Class\")])\n\n# A tibble: 6 × 5\n  학습시간 출석률 과제점수 수업참여 Class\n     &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;\n1    1.33   1.45    0.576   0.304       1\n2    0.522  0.789   0.992   0.288       1\n3    1.14   0.892   0.671  -0.0142      1\n4    1.03   0.551  -0.0904  0.800       1\n5    0.732  1.36    0.642  -0.00566     1\n6   -0.208  1.20    1.60    0.0299      1\n\n# 프로파일별 인원 수\ntable(results$Class)\n\n\n  1   2   3 \n109 116  75 \n\n\n\n프로파일별 평균 비교\n\nprofile_means &lt;- results %&gt;%\n  group_by(Class) %&gt;%\n  summarise(across(c(학습시간, 출석률, 과제점수, 수업참여), mean),\n            n = n(),\n            .groups = \"drop\")\n\nprofile_means\n\n# A tibble: 3 × 6\n  Class 학습시간  출석률 과제점수 수업참여     n\n  &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;int&gt;\n1     1   0.967   1.01      0.845    0.360   109\n2     2  -0.893  -0.935    -1.02    -1.04    116\n3     3  -0.0238 -0.0200    0.352    1.09     75\n\n\n\n\n프로파일 시각화\n\n# 프로파일별 변수 평균 막대 그래프\nvars &lt;- c(\"학습시간\", \"출석률\", \"과제점수\", \"수업참여\")\nn_profiles &lt;- nrow(profile_means)\ncolors &lt;- c(\"#0f3460\", \"#e94560\", \"#28a745\", \"#f39c12\", \"#9b59b6\", \"#1abc9c\")\n\npar(mar = c(5, 4, 3, 8), xpd = TRUE)\nbp &lt;- barplot(\n  as.matrix(profile_means[, vars]),\n  beside = TRUE,\n  col = colors[1:n_profiles],\n  border = NA,\n  main = \"프로파일별 변수 평균 (표준화)\",\n  ylab = \"표준화 점수\",\n  las = 2,\n  cex.names = 0.9\n)\n\nabline(h = 0, lty = 2, col = \"gray50\")\n\nlegend(\"topright\", inset = c(-0.2, 0),\n       legend = paste0(\"프로파일 \", 1:n_profiles,\n                       \" (n=\", profile_means$n, \")\"),\n       fill = colors[1:n_profiles], border = NA,\n       bty = \"n\", cex = 0.85)\n\n\n\n\n\n\n\n\n\n\n라인 프로파일 플롯\n\npar(mar = c(5, 4, 3, 8), xpd = TRUE)\n\nx_pos &lt;- 1:length(vars)\nplot(x_pos, as.numeric(profile_means[1, vars]),\n     type = \"b\", pch = 16, lwd = 2, col = colors[1],\n     ylim = range(profile_means[, vars]) * 1.2,\n     xaxt = \"n\", xlab = \"\", ylab = \"표준화 점수\",\n     main = \"잠재 프로파일 라인 플롯\", las = 1)\naxis(1, at = x_pos, labels = vars, las = 2)\n\nfor (i in 2:n_profiles) {\n  lines(x_pos, as.numeric(profile_means[i, vars]),\n        type = \"b\", pch = 16, lwd = 2, col = colors[i])\n}\n\nabline(h = 0, lty = 2, col = \"gray50\")\nlegend(\"topright\", inset = c(-0.2, 0),\n       legend = paste0(\"프로파일 \", 1:n_profiles),\n       col = colors[1:n_profiles], lwd = 2, pch = 16,\n       bty = \"n\", cex = 0.85)"
+  },
+  {
+    "objectID": "posts/latent-profile-analysis/index.html#분류-정확도-확인",
+    "href": "posts/latent-profile-analysis/index.html#분류-정확도-확인",
+    "title": "R로 배우는 잠재 프로파일 분석(LPA) 완전 가이드",
+    "section": "분류 정확도 확인",
+    "text": "분류 정확도 확인\n\n소속 확률 분포\n\n# 각 학생의 최대 소속 확률\nmax_prob &lt;- apply(results[, grep(\"CPROB\", names(results))], 1, max)\n\nhist(max_prob, breaks = 20, col = \"#0f3460\", border = \"white\",\n     main = \"프로파일 소속 확률 분포\",\n     xlab = \"최대 소속 확률\", ylab = \"빈도\", las = 1)\nabline(v = 0.7, lty = 2, col = \"red\", lwd = 2)\n\n\n\n\n\n\n\ncat(sprintf(\"소속 확률 0.7 이상 비율: %.1f%%\\n\", mean(max_prob &gt;= 0.7) * 100))\n\n소속 확률 0.7 이상 비율: 95.0%\n\ncat(sprintf(\"소속 확률 0.8 이상 비율: %.1f%%\\n\", mean(max_prob &gt;= 0.8) * 100))\n\n소속 확률 0.8 이상 비율: 93.0%\n\n\n소속 확률이 대부분 0.7 이상이면 분류가 명확한 것입니다."
+  },
+  {
+    "objectID": "posts/latent-profile-analysis/index.html#원래-스케일로-해석",
+    "href": "posts/latent-profile-analysis/index.html#원래-스케일로-해석",
+    "title": "R로 배우는 잠재 프로파일 분석(LPA) 완전 가이드",
+    "section": "원래 스케일로 해석",
+    "text": "원래 스케일로 해석\n표준화된 점수는 해석이 어려우므로 원래 스케일의 평균도 확인합니다.\n\nstudents$Class &lt;- results$Class\n\noriginal_means &lt;- students %&gt;%\n  group_by(Class) %&gt;%\n  summarise(\n    학습시간_평균 = round(mean(학습시간), 1),\n    출석률_평균 = round(mean(출석률), 1),\n    과제점수_평균 = round(mean(과제점수), 1),\n    수업참여_평균 = round(mean(수업참여), 1),\n    인원수 = n(),\n    .groups = \"drop\"\n  )\n\noriginal_means\n\n# A tibble: 3 × 6\n  Class 학습시간_평균 출석률_평균 과제점수_평균 수업참여_평균 인원수\n  &lt;dbl&gt;         &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;  &lt;int&gt;\n1     1           6.8        90.4          86.2          69.8    109\n2     2           3.1        65.2          54.2          38.5    116\n3     3           4.8        77            77.7          86       75\n\n\n\n프로파일 명명\n분석 결과에 따라 각 프로파일에 의미 있는 이름을 부여합니다.\n\n# 예시 (실제 결과에 따라 달라짐)\ncat(\"프로파일 해석 예시:\\n\")\n\n프로파일 해석 예시:\n\ncat(\"- 프로파일 1: 성실 학습형 (높은 학습시간 + 출석)\\n\")\n\n- 프로파일 1: 성실 학습형 (높은 학습시간 + 출석)\n\ncat(\"- 프로파일 2: 소극 학습형 (전반적으로 낮음)\\n\")\n\n- 프로파일 2: 소극 학습형 (전반적으로 낮음)\n\ncat(\"- 프로파일 3: 전략적 참여형 (높은 참여 + 과제)\\n\")\n\n- 프로파일 3: 전략적 참여형 (높은 참여 + 과제)"
+  },
+  {
+    "objectID": "posts/latent-profile-analysis/index.html#분산-공분산-구조-비교",
+    "href": "posts/latent-profile-analysis/index.html#분산-공분산-구조-비교",
+    "title": "R로 배우는 잠재 프로파일 분석(LPA) 완전 가이드",
+    "section": "분산-공분산 구조 비교",
+    "text": "분산-공분산 구조 비교\ntidyLPA는 4가지 모형 구조를 지원합니다.\n\n\n\n모형\n분산\n공분산\n\n\n\n\n1\n동일\n0 (고정)\n\n\n2\n자유\n0 (고정)\n\n\n3\n동일\n동일\n\n\n6\n자유\n자유\n\n\n\n\n# 모형 1 vs 2 비교 (3-프로파일 기준)\nmodel_1 &lt;- students_scaled %&gt;% estimate_profiles(3, variances = \"equal\", covariances = \"zero\")\nmodel_2 &lt;- students_scaled %&gt;% estimate_profiles(3, variances = \"varying\", covariances = \"zero\")\n\ncat(\"모형 1 (동일분산, 공분산=0)\\n\")\n\n모형 1 (동일분산, 공분산=0)\n\ncat(sprintf(\"  BIC: %.1f, Entropy: %.3f\\n\",\n    get_fit(model_1)$BIC, get_fit(model_1)$Entropy))\n\n  BIC: 2646.3, Entropy: 0.901\n\ncat(\"모형 2 (자유분산, 공분산=0)\\n\")\n\n모형 2 (자유분산, 공분산=0)\n\ncat(sprintf(\"  BIC: %.1f, Entropy: %.3f\\n\",\n    get_fit(model_2)$BIC, get_fit(model_2)$Entropy))\n\n  BIC: 2616.3, Entropy: 0.943"
+  },
+  {
+    "objectID": "posts/latent-profile-analysis/index.html#보고서-작성-가이드",
+    "href": "posts/latent-profile-analysis/index.html#보고서-작성-가이드",
+    "title": "R로 배우는 잠재 프로파일 분석(LPA) 완전 가이드",
+    "section": "보고서 작성 가이드",
+    "text": "보고서 작성 가이드\nLPA 결과를 논문이나 보고서에 작성할 때 포함해야 할 내용:\n\n1. 모형 선택 근거\n\n“2~6개 프로파일 모형을 비교한 결과, BIC 값과 Entropy, BLRT 검정 결과를 종합적으로 고려하여 3-프로파일 모형을 최적 모형으로 선택하였다.”\n\n\n\n2. 적합도 표\n\n\n\n프로파일 수\nAIC\nBIC\nEntropy\nBLRT p\n\n\n\n\n2\n…\n…\n…\n…\n\n\n3\n…\n…\n…\n…\n\n\n4\n…\n…\n…\n…\n\n\n\n\n\n3. 프로파일 특성 기술\n\n“프로파일 1(성실 학습형, n=100, 33.3%)은 학습시간(M=7.0), 출석률(M=90.0), 과제점수(M=85.0) 모두 높은 집단으로…”\n\n\n\n4. 주의사항\n\n표본 크기: 프로파일당 최소 50명 이상 권장\n변수 선택: 이론적 근거 기반으로 변수 선택\n재현성: 다른 표본에서도 유사한 프로파일이 도출되는지 확인\n로컬 최적해: 시작값(random starts)을 충분히 설정"
   },
   {
     "objectID": "posts/r-apply-functions/index.html",
