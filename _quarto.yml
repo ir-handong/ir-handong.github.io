@@ -5,8 +5,7 @@ project:
 lang: ko
 
 website:
-  title: "IR Handong"
-  description: "한동대학교 IR 데이터 분석 블로그"
+  title: "IR"
   site-url: https://ir-handong.github.io
   navbar:
     background: dark
