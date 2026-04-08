@@ -7,6 +7,7 @@ listing:
   type: grid
   categories: true
   fields: [title, description, date, categories]
+  date-format: "YYYY.MM.DD"
 page-layout: full
 title-block-banner: true
 ---

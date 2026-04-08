@@ -1,7 +1,22 @@
 /* ===== IR Handong Blog - Custom Styles ===== */
 
-/* Quarto listing ::: rendering bug fix */
-#quarto-content .quarto-listing-container > p {
+/* Quarto 1.8.25 listing bug fixes */
+/* ::: rendered as <p>:::</p> */
+#quarto-content .quarto-listing-container p:has(+ div),
+#quarto-content .quarto-listing-container > p,
+.quarto-grid-item p:last-child,
+.quarto-listing-container p {
+  display: none;
+}
+.quarto-listing-container .card-text p,
+.quarto-listing-container .listing-description p {
+  display: block;
+}
+/* Date rendered as <ol> instead of text */
+.quarto-grid-item .listing-date ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: none;
 }
 
