@@ -5,18 +5,27 @@ project:
 lang: ko
 
 website:
-  title: "My Blog"
+  title: "IR Handong"
+  description: "한동대학교 IR 데이터 분석 블로그"
   site-url: https://ir-handong.github.io
   navbar:
+    background: dark
     left:
       - href: index.qmd
-        text: 블로그
-      - about.qmd
+        text: 홈
+      - href: about.qmd
+        text: 소개
     right:
       - icon: github
         href: https://github.com/ir-handong
+  page-footer:
+    center: "&copy; 2026 IR Handong. All rights reserved."
 
 format:
   html:
-    theme: cosmo
+    theme:
+      light: flatly
     css: styles.css
+    toc: true
+    code-copy: true
+    code-overflow: wrap

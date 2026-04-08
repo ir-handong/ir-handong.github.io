@@ -58,15 +58,22 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "소개",
     "section": "",
-    "text": "About this blog"
+    "text": "한동대학교 기관연구(IR) 데이터 분석 블로그입니다.\nR, Python 등을 활용한 데이터 분석 방법론과 대학 행정 데이터 활용 사례를 공유합니다."
+  },
+  {
+    "objectID": "about.html#ir-handong",
+    "href": "about.html#ir-handong",
+    "title": "소개",
+    "section": "",
+    "text": "한동대학교 기관연구(IR) 데이터 분석 블로그입니다.\nR, Python 등을 활용한 데이터 분석 방법론과 대학 행정 데이터 활용 사례를 공유합니다."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "My Blog",
+    "title": "IR Handong",
     "section": "",
-    "text": "R의 apply 함수 패밀리 완전 정복\n\n\n\nR\n\n프로그래밍\n\n\n\napply, sapply, lapply, tapply, mapply의 차이점과 활용법\n\n\n\nir-handong\n\n\n\n\n8.\n\n\n\n\n:::\n\n:::\n:::\n일치 없음\n:::\n:::"
+    "text": "R의 apply 함수 패밀리 완전 정복\n\n\n\nR\n\n프로그래밍\n\n\n\napply, sapply, lapply, tapply, mapply의 차이점과 활용법\n\n\n\n\n\n8.\n\n\n\n\n:::\n\n:::\n:::\n일치 없음\n:::\n:::"
   }
 ]

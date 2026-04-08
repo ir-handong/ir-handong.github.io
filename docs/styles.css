@@ -1,4 +1,183 @@
-/* Hide Quarto listing ::: rendering bug */
+/* ===== IR Handong Blog - Custom Styles ===== */
+
+/* Quarto listing ::: rendering bug fix */
 #quarto-content .quarto-listing-container > p {
   display: none;
+}
+
+/* --- Typography --- */
+body {
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: #2c3e50;
+  line-height: 1.8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+/* --- Navbar --- */
+.navbar {
+  border-bottom: 2px solid #e9ecef;
+  padding: 0.8rem 1rem;
+}
+
+.navbar-brand {
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+/* --- Homepage Title --- */
+.quarto-title-banner {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%) !important;
+  padding: 3rem 0 !important;
+}
+
+.quarto-title-banner .title {
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+}
+
+/* --- Post Cards --- */
+.quarto-grid-item {
+  border: 1px solid #e9ecef !important;
+  border-radius: 12px !important;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.quarto-grid-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.quarto-grid-item .card-body {
+  padding: 1.5rem !important;
+}
+
+.quarto-grid-item .card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  line-height: 1.4;
+}
+
+.quarto-grid-item .card-text {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.quarto-grid-item .listing-categories .listing-category {
+  background-color: #e8f4f8;
+  color: #0f3460;
+  border: none;
+  border-radius: 20px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* --- Article Page --- */
+.quarto-title {
+  margin-bottom: 1.5rem;
+}
+
+.quarto-title .title {
+  font-size: 2rem;
+  line-height: 1.3;
+}
+
+.quarto-title .quarto-categories .quarto-category {
+  background-color: #e8f4f8;
+  color: #0f3460;
+  border: none;
+  border-radius: 20px;
+  padding: 0.25rem 0.9rem;
+  font-weight: 600;
+}
+
+/* --- Code Blocks --- */
+pre.sourceCode {
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  background-color: #f8f9fa !important;
+  padding: 1rem;
+  font-size: 0.88rem;
+}
+
+code {
+  font-family: "Fira Code", "D2Coding", monospace;
+}
+
+div.sourceCode {
+  border-radius: 8px;
+  margin: 1.2rem 0;
+}
+
+/* --- Tables --- */
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background-color: #1a1a2e;
+  color: white;
+  font-weight: 600;
+  border: none;
+  padding: 0.75rem 1rem;
+}
+
+.table tbody td {
+  padding: 0.65rem 1rem;
+  border-color: #e9ecef;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f8f9fa;
+}
+
+/* --- TOC --- */
+.sidebar nav[role="doc-toc"] {
+  border-left: 2px solid #e9ecef;
+  padding-left: 1rem;
+}
+
+.sidebar nav[role="doc-toc"] a {
+  color: #6c757d;
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.sidebar nav[role="doc-toc"] a:hover,
+.sidebar nav[role="doc-toc"] a.active {
+  color: #0f3460;
+  font-weight: 600;
+}
+
+/* --- Footer --- */
+.nav-footer {
+  border-top: 2px solid #e9ecef;
+  padding: 1.5rem 0;
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+/* --- About Page --- */
+.about-entity .about-link {
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 768px) {
+  .quarto-title-banner .title {
+    font-size: 1.6rem !important;
+  }
+
+  .quarto-grid-item .card-body {
+    padding: 1rem !important;
+  }
 }
