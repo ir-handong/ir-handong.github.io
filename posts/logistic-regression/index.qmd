@@ -1,0 +1,257 @@
+---
+title: "R로 배우는 로지스틱 회귀분석 완전 가이드"
+author: "ir-handong"
+date: "2026-04-08"
+categories: [R, 통계, 머신러닝]
+description: "이진 분류의 핵심, 로지스틱 회귀를 R 실습과 함께 처음부터 끝까지 정리합니다"
+---
+
+## 로지스틱 회귀란?
+
+로지스틱 회귀(Logistic Regression)는 **종속변수가 범주형(0 또는 1)**일 때 사용하는 분류 모델입니다.
+
+- 합격/불합격
+- 이탈/잔류
+- 질병 유/무
+
+선형 회귀는 연속적인 값을 예측하지만, 로지스틱 회귀는 **특정 범주에 속할 확률**을 예측합니다.
+
+## 핵심 개념: 시그모이드 함수
+
+로지스틱 회귀는 선형 결합을 **시그모이드 함수**에 통과시켜 0~1 사이의 확률로 변환합니다.
+
+$$
+P(Y=1|X) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 X)}}
+$$
+
+```{r}
+# 시그모이드 함수 시각화
+sigmoid <- function(z) 1 / (1 + exp(-z))
+
+z <- seq(-6, 6, by = 0.1)
+plot(z, sigmoid(z), type = "l", lwd = 2, col = "#0f3460",
+     main = "시그모이드 함수", xlab = "z", ylab = "P(Y=1)",
+     las = 1)
+abline(h = 0.5, lty = 2, col = "gray50")
+abline(v = 0, lty = 2, col = "gray50")
+```
+
+- z가 클수록 → 확률이 1에 가까움
+- z가 작을수록 → 확률이 0에 가까움
+- z = 0일 때 → 확률 = 0.5 (결정 경계)
+
+## 예제 데이터: 학생 합격 예측
+
+시험 점수와 출석률로 합격 여부를 예측하는 모델을 만들어봅시다.
+
+```{r}
+set.seed(42)
+n <- 200
+
+score <- round(rnorm(n, mean = 65, sd = 15), 1)
+attendance <- round(runif(n, 50, 100), 1)
+
+prob <- sigmoid(-8 + 0.08 * score + 0.05 * attendance)
+pass <- rbinom(n, 1, prob)
+
+students <- data.frame(
+  점수 = score,
+  출석률 = attendance,
+  합격 = factor(pass, labels = c("불합격", "합격"))
+)
+
+head(students, 10)
+table(students$합격)
+```
+
+## 모델 적합: glm()
+
+R에서 로지스틱 회귀는 `glm()` 함수에 `family = binomial`을 지정하여 수행합니다.
+
+```{r}
+model <- glm(합격 ~ 점수 + 출석률, data = students, family = binomial)
+summary(model)
+```
+
+### 결과 해석
+
+- **Estimate**: 회귀 계수 (로그 오즈 단위)
+- **Pr(>|z|)**: p-value. 작을수록 유의미
+- **AIC**: 모델 적합도 (낮을수록 좋음)
+
+## 오즈비(Odds Ratio) 해석
+
+회귀 계수를 지수 변환하면 **오즈비**를 얻을 수 있습니다.
+
+```{r}
+# 오즈비
+exp(coef(model))
+
+# 신뢰구간 포함
+exp(cbind(OR = coef(model), confint(model)))
+```
+
+**해석 예시**: 점수의 오즈비가 1.08이면, 점수가 1점 증가할 때 합격 오즈가 약 8% 증가합니다.
+
+## 예측
+
+### 확률 예측
+
+```{r}
+# 훈련 데이터에 대한 예측 확률
+students$예측확률 <- predict(model, type = "response")
+
+head(students[, c("점수", "출석률", "합격", "예측확률")], 10)
+```
+
+### 새로운 데이터 예측
+
+```{r}
+new_students <- data.frame(
+  점수 = c(80, 50, 70),
+  출석률 = c(90, 60, 75)
+)
+
+new_students$합격확률 <- predict(model, newdata = new_students, type = "response")
+new_students$예측결과 <- ifelse(new_students$합격확률 >= 0.5, "합격", "불합격")
+new_students
+```
+
+## 모델 평가
+
+### 혼동 행렬 (Confusion Matrix)
+
+```{r}
+predicted_class <- ifelse(students$예측확률 >= 0.5, "합격", "불합격")
+predicted_class <- factor(predicted_class, levels = c("불합격", "합격"))
+
+confusion <- table(예측 = predicted_class, 실제 = students$합격)
+confusion
+```
+
+### 정확도, 정밀도, 재현율
+
+```{r}
+accuracy <- sum(diag(confusion)) / sum(confusion)
+precision <- confusion["합격", "합격"] / sum(confusion["합격", ])
+recall <- confusion["합격", "합격"] / sum(confusion[, "합격"])
+f1 <- 2 * precision * recall / (precision + recall)
+
+cat(sprintf("정확도(Accuracy):  %.1f%%\n", accuracy * 100))
+cat(sprintf("정밀도(Precision): %.1f%%\n", precision * 100))
+cat(sprintf("재현율(Recall):    %.1f%%\n", recall * 100))
+cat(sprintf("F1 Score:          %.3f\n", f1))
+```
+
+| 지표 | 의미 |
+|------|------|
+| 정확도 | 전체 중 맞춘 비율 |
+| 정밀도 | 합격 예측 중 실제 합격 비율 |
+| 재현율 | 실제 합격 중 맞춘 비율 |
+| F1 | 정밀도와 재현율의 조화평균 |
+
+### ROC 곡선과 AUC
+
+```{r}
+# 직접 ROC 계산
+thresholds <- seq(0, 1, by = 0.01)
+tpr <- sapply(thresholds, function(t) {
+  pred <- ifelse(students$예측확률 >= t, 1, 0)
+  actual <- as.numeric(students$합격 == "합격")
+  sum(pred == 1 & actual == 1) / sum(actual == 1)
+})
+fpr <- sapply(thresholds, function(t) {
+  pred <- ifelse(students$예측확률 >= t, 1, 0)
+  actual <- as.numeric(students$합격 == "합격")
+  sum(pred == 1 & actual == 0) / sum(actual == 0)
+})
+
+plot(fpr, tpr, type = "l", lwd = 2, col = "#0f3460",
+     main = "ROC 곡선", xlab = "FPR (1 - 특이도)", ylab = "TPR (민감도)",
+     las = 1)
+abline(a = 0, b = 1, lty = 2, col = "gray50")
+
+# AUC 근사 계산
+auc <- sum(diff(sort(fpr)) * (tpr[order(fpr)][-1] + tpr[order(fpr)][-length(tpr)]) / 2)
+legend("bottomright", legend = sprintf("AUC = %.3f", abs(auc)),
+       col = "#0f3460", lwd = 2, bty = "n")
+```
+
+- **AUC = 1**: 완벽한 분류
+- **AUC = 0.5**: 무작위 수준
+- **AUC > 0.8**: 일반적으로 좋은 모델
+
+## 시각화: 결정 경계
+
+```{r}
+# 점수에 따른 합격 확률 (출석률 평균 고정)
+score_range <- seq(30, 100, by = 1)
+avg_att <- mean(students$출석률)
+
+pred_df <- data.frame(점수 = score_range, 출석률 = avg_att)
+pred_df$확률 <- predict(model, newdata = pred_df, type = "response")
+
+plot(pred_df$점수, pred_df$확률, type = "l", lwd = 2, col = "#0f3460",
+     main = "점수에 따른 합격 확률", xlab = "시험 점수", ylab = "합격 확률",
+     las = 1, ylim = c(0, 1))
+abline(h = 0.5, lty = 2, col = "red")
+
+# 실제 데이터 포인트
+actual <- as.numeric(students$합격 == "합격")
+points(students$점수, jitter(actual, amount = 0.03),
+       col = ifelse(actual == 1, "#28a745", "#dc3545"),
+       pch = 16, cex = 0.6)
+legend("topleft",
+       legend = c("합격", "불합격", "예측 확률", "결정 경계"),
+       col = c("#28a745", "#dc3545", "#0f3460", "red"),
+       pch = c(16, 16, NA, NA), lty = c(NA, NA, 1, 2), lwd = 2,
+       bty = "n", cex = 0.9)
+```
+
+## 다중 클래스로 확장
+
+로지스틱 회귀는 기본적으로 이진 분류이지만, **다항 로지스틱 회귀**로 확장할 수 있습니다.
+
+```{r}
+# iris 데이터로 3-class 분류
+library(nnet)
+
+iris_model <- multinom(Species ~ ., data = iris, trace = FALSE)
+
+# 예측
+pred <- predict(iris_model, iris)
+table(예측 = pred, 실제 = iris$Species)
+
+# 정확도
+cat(sprintf("정확도: %.1f%%\n", mean(pred == iris$Species) * 100))
+```
+
+## 주의사항
+
+### 1. 다중공선성 확인
+
+```{r}
+# 독립변수 간 상관관계
+cor(students[, c("점수", "출석률")])
+```
+
+상관계수가 0.8 이상이면 다중공선성을 의심해야 합니다.
+
+### 2. 선형성 가정
+
+로지스틱 회귀는 독립변수와 **로그 오즈** 간의 선형 관계를 가정합니다.
+
+### 3. 표본 크기
+
+일반적으로 각 범주별 **최소 10~20개** 이상의 관측치가 필요합니다.
+
+## 선형 회귀 vs 로지스틱 회귀
+
+| | 선형 회귀 | 로지스틱 회귀 |
+|---|---|---|
+| **종속변수** | 연속형 | 범주형 (0/1) |
+| **함수** | `lm()` | `glm(family=binomial)` |
+| **출력** | 예측값 | 확률 (0~1) |
+| **손실함수** | MSE | Log Loss |
+| **해석** | 기울기 = 변화량 | 오즈비 = 변화 배율 |
+| **예시** | 매출 예측 | 이탈 예측 |

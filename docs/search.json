@@ -63,11 +63,88 @@
     "text": "한눈에 비교\n\n\n\n\n벡터\n행렬\n데이터프레임\n리스트\n\n\n\n\n차원\n1D\n2D\n2D\n1D\n\n\n타입\n동일\n동일\n열마다 다름\n전부 다름\n\n\n생성\nc()\nmatrix()\ndata.frame()\nlist()\n\n\n접근\nx[1]\nm[1,2]\ndf$col\nl[[1]]\n\n\n용도\n단일 변수\n수학 연산\n테이블 데이터\n복합 데이터"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "IR Handong",
+    "objectID": "posts/logistic-regression/index.html",
+    "href": "posts/logistic-regression/index.html",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
     "section": "",
-    "text": "R의 apply 함수 패밀리 완전 정복\n\n\n\nR\n\n프로그래밍\n\n\n\napply, sapply, lapply, tapply, mapply의 차이점과 활용법\n\n\n\n2026.04.08\n\n\n\n\n\n\n\n\n\n\nR 자료구조 완전 정복: 벡터, 행렬, 데이터프레임, 리스트\n\n\n\nR\n\n프로그래밍\n\n\n\nR의 핵심 자료구조 4가지를 예제와 함께 정리합니다\n\n\n\n2026.04.08\n\n\n\n\n\n\n일치 없음"
+    "text": "로지스틱 회귀(Logistic Regression)는 종속변수가 범주형(0 또는 1)일 때 사용하는 분류 모델입니다.\n\n합격/불합격\n이탈/잔류\n질병 유/무\n\n선형 회귀는 연속적인 값을 예측하지만, 로지스틱 회귀는 특정 범주에 속할 확률을 예측합니다."
+  },
+  {
+    "objectID": "posts/logistic-regression/index.html#로지스틱-회귀란",
+    "href": "posts/logistic-regression/index.html#로지스틱-회귀란",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
+    "section": "",
+    "text": "로지스틱 회귀(Logistic Regression)는 종속변수가 범주형(0 또는 1)일 때 사용하는 분류 모델입니다.\n\n합격/불합격\n이탈/잔류\n질병 유/무\n\n선형 회귀는 연속적인 값을 예측하지만, 로지스틱 회귀는 특정 범주에 속할 확률을 예측합니다."
+  },
+  {
+    "objectID": "posts/logistic-regression/index.html#핵심-개념-시그모이드-함수",
+    "href": "posts/logistic-regression/index.html#핵심-개념-시그모이드-함수",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
+    "section": "핵심 개념: 시그모이드 함수",
+    "text": "핵심 개념: 시그모이드 함수\n로지스틱 회귀는 선형 결합을 시그모이드 함수에 통과시켜 0~1 사이의 확률로 변환합니다.\n\\[\nP(Y=1|X) = \\frac{1}{1 + e^{-(\\beta_0 + \\beta_1 X)}}\n\\]\n\n# 시그모이드 함수 시각화\nsigmoid &lt;- function(z) 1 / (1 + exp(-z))\n\nz &lt;- seq(-6, 6, by = 0.1)\nplot(z, sigmoid(z), type = \"l\", lwd = 2, col = \"#0f3460\",\n     main = \"시그모이드 함수\", xlab = \"z\", ylab = \"P(Y=1)\",\n     las = 1)\nabline(h = 0.5, lty = 2, col = \"gray50\")\nabline(v = 0, lty = 2, col = \"gray50\")\n\n\n\n\n\n\n\n\n\nz가 클수록 → 확률이 1에 가까움\nz가 작을수록 → 확률이 0에 가까움\nz = 0일 때 → 확률 = 0.5 (결정 경계)"
+  },
+  {
+    "objectID": "posts/logistic-regression/index.html#예제-데이터-학생-합격-예측",
+    "href": "posts/logistic-regression/index.html#예제-데이터-학생-합격-예측",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
+    "section": "예제 데이터: 학생 합격 예측",
+    "text": "예제 데이터: 학생 합격 예측\n시험 점수와 출석률로 합격 여부를 예측하는 모델을 만들어봅시다.\n\nset.seed(42)\nn &lt;- 200\n\nscore &lt;- round(rnorm(n, mean = 65, sd = 15), 1)\nattendance &lt;- round(runif(n, 50, 100), 1)\n\nprob &lt;- sigmoid(-8 + 0.08 * score + 0.05 * attendance)\npass &lt;- rbinom(n, 1, prob)\n\nstudents &lt;- data.frame(\n  점수 = score,\n  출석률 = attendance,\n  합격 = factor(pass, labels = c(\"불합격\", \"합격\"))\n)\n\nhead(students, 10)\n\n   점수 출석률   합격\n1  85.6   51.1   합격\n2  56.5   75.7   합격\n3  70.4   81.5   합격\n4  74.5   70.9   합격\n5  71.1   94.0   합격\n6  63.4   55.4 불합격\n7  87.7   99.0   합격\n8  63.6   63.2   합격\n9  95.3   54.2   합격\n10 64.1   69.3   합격\n\ntable(students$합격)\n\n\n불합격   합격 \n    69    131"
+  },
+  {
+    "objectID": "posts/logistic-regression/index.html#모델-적합-glm",
+    "href": "posts/logistic-regression/index.html#모델-적합-glm",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
+    "section": "모델 적합: glm()",
+    "text": "모델 적합: glm()\nR에서 로지스틱 회귀는 glm() 함수에 family = binomial을 지정하여 수행합니다.\n\nmodel &lt;- glm(합격 ~ 점수 + 출석률, data = students, family = binomial)\nsummary(model)\n\n\nCall:\nglm(formula = 합격 ~ 점수 + 출석률, family = binomial, \n    data = students)\n\nCoefficients:\n             Estimate Std. Error z value Pr(&gt;|z|)    \n(Intercept) -10.97336    1.73565  -6.322 2.58e-10 ***\n점수          0.11878    0.01834   6.475 9.46e-11 ***\n출석률        0.05895    0.01419   4.153 3.27e-05 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n(Dispersion parameter for binomial family taken to be 1)\n\n    Null deviance: 257.72  on 199  degrees of freedom\nResidual deviance: 173.33  on 197  degrees of freedom\nAIC: 179.33\n\nNumber of Fisher Scoring iterations: 5\n\n\n\n결과 해석\n\nEstimate: 회귀 계수 (로그 오즈 단위)\nPr(&gt;|z|): p-value. 작을수록 유의미\nAIC: 모델 적합도 (낮을수록 좋음)"
+  },
+  {
+    "objectID": "posts/logistic-regression/index.html#오즈비odds-ratio-해석",
+    "href": "posts/logistic-regression/index.html#오즈비odds-ratio-해석",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
+    "section": "오즈비(Odds Ratio) 해석",
+    "text": "오즈비(Odds Ratio) 해석\n회귀 계수를 지수 변환하면 오즈비를 얻을 수 있습니다.\n\n# 오즈비\nexp(coef(model))\n\n (Intercept)         점수       출석률 \n1.715264e-05 1.126124e+00 1.060726e+00 \n\n# 신뢰구간 포함\nexp(cbind(OR = coef(model), confint(model)))\n\nWaiting for profiling to be done...\n\n\n                      OR        2.5 %       97.5 %\n(Intercept) 1.715264e-05 4.435357e-07 0.0004131093\n점수        1.126124e+00 1.089144e+00 1.1707664021\n출석률      1.060726e+00 1.032722e+00 1.0921237606\n\n\n해석 예시: 점수의 오즈비가 1.08이면, 점수가 1점 증가할 때 합격 오즈가 약 8% 증가합니다."
+  },
+  {
+    "objectID": "posts/logistic-regression/index.html#예측",
+    "href": "posts/logistic-regression/index.html#예측",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
+    "section": "예측",
+    "text": "예측\n\n확률 예측\n\n# 훈련 데이터에 대한 예측 확률\nstudents$예측확률 &lt;- predict(model, type = \"response\")\n\nhead(students[, c(\"점수\", \"출석률\", \"합격\", \"예측확률\")], 10)\n\n   점수 출석률   합격  예측확률\n1  85.6   51.1   합격 0.9008685\n2  56.5   75.7   합격 0.5499870\n3  70.4   81.5   합격 0.8996750\n4  74.5   70.9   합격 0.8865239\n5  71.1   94.0   합격 0.9531887\n6  63.4   55.4 불합격 0.4559776\n7  87.7   99.0   합격 0.9949346\n8  63.6   63.2   합격 0.5761647\n9  95.3   54.2   합격 0.9718555\n10 64.1   69.3   합격 0.6739395\n\n\n\n\n새로운 데이터 예측\n\nnew_students &lt;- data.frame(\n  점수 = c(80, 50, 70),\n  출석률 = c(90, 60, 75)\n)\n\nnew_students$합격확률 &lt;- predict(model, newdata = new_students, type = \"response\")\nnew_students$예측결과 &lt;- ifelse(new_students$합격확률 &gt;= 0.5, \"합격\", \"불합격\")\nnew_students\n\n  점수 출석률  합격확률 예측결과\n1   80     90 0.9788561     합격\n2   50     60 0.1828677   불합격\n3   70     75 0.8535734     합격"
+  },
+  {
+    "objectID": "posts/logistic-regression/index.html#모델-평가",
+    "href": "posts/logistic-regression/index.html#모델-평가",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
+    "section": "모델 평가",
+    "text": "모델 평가\n\n혼동 행렬 (Confusion Matrix)\n\npredicted_class &lt;- ifelse(students$예측확률 &gt;= 0.5, \"합격\", \"불합격\")\npredicted_class &lt;- factor(predicted_class, levels = c(\"불합격\", \"합격\"))\n\nconfusion &lt;- table(예측 = predicted_class, 실제 = students$합격)\nconfusion\n\n        실제\n예측   불합격 합격\n  불합격     43   17\n  합격       26  114\n\n\n\n\n정확도, 정밀도, 재현율\n\naccuracy &lt;- sum(diag(confusion)) / sum(confusion)\nprecision &lt;- confusion[\"합격\", \"합격\"] / sum(confusion[\"합격\", ])\nrecall &lt;- confusion[\"합격\", \"합격\"] / sum(confusion[, \"합격\"])\nf1 &lt;- 2 * precision * recall / (precision + recall)\n\ncat(sprintf(\"정확도(Accuracy):  %.1f%%\\n\", accuracy * 100))\n\n정확도(Accuracy):  78.5%\n\ncat(sprintf(\"정밀도(Precision): %.1f%%\\n\", precision * 100))\n\n정밀도(Precision): 81.4%\n\ncat(sprintf(\"재현율(Recall):    %.1f%%\\n\", recall * 100))\n\n재현율(Recall):    87.0%\n\ncat(sprintf(\"F1 Score:          %.3f\\n\", f1))\n\nF1 Score:          0.841\n\n\n\n\n\n지표\n의미\n\n\n\n\n정확도\n전체 중 맞춘 비율\n\n\n정밀도\n합격 예측 중 실제 합격 비율\n\n\n재현율\n실제 합격 중 맞춘 비율\n\n\nF1\n정밀도와 재현율의 조화평균\n\n\n\n\n\nROC 곡선과 AUC\n\n# 직접 ROC 계산\nthresholds &lt;- seq(0, 1, by = 0.01)\ntpr &lt;- sapply(thresholds, function(t) {\n  pred &lt;- ifelse(students$예측확률 &gt;= t, 1, 0)\n  actual &lt;- as.numeric(students$합격 == \"합격\")\n  sum(pred == 1 & actual == 1) / sum(actual == 1)\n})\nfpr &lt;- sapply(thresholds, function(t) {\n  pred &lt;- ifelse(students$예측확률 &gt;= t, 1, 0)\n  actual &lt;- as.numeric(students$합격 == \"합격\")\n  sum(pred == 1 & actual == 0) / sum(actual == 0)\n})\n\nplot(fpr, tpr, type = \"l\", lwd = 2, col = \"#0f3460\",\n     main = \"ROC 곡선\", xlab = \"FPR (1 - 특이도)\", ylab = \"TPR (민감도)\",\n     las = 1)\nabline(a = 0, b = 1, lty = 2, col = \"gray50\")\n\n# AUC 근사 계산\nauc &lt;- sum(diff(sort(fpr)) * (tpr[order(fpr)][-1] + tpr[order(fpr)][-length(tpr)]) / 2)\nlegend(\"bottomright\", legend = sprintf(\"AUC = %.3f\", abs(auc)),\n       col = \"#0f3460\", lwd = 2, bty = \"n\")\n\n\n\n\n\n\n\n\n\nAUC = 1: 완벽한 분류\nAUC = 0.5: 무작위 수준\nAUC &gt; 0.8: 일반적으로 좋은 모델"
+  },
+  {
+    "objectID": "posts/logistic-regression/index.html#시각화-결정-경계",
+    "href": "posts/logistic-regression/index.html#시각화-결정-경계",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
+    "section": "시각화: 결정 경계",
+    "text": "시각화: 결정 경계\n\n# 점수에 따른 합격 확률 (출석률 평균 고정)\nscore_range &lt;- seq(30, 100, by = 1)\navg_att &lt;- mean(students$출석률)\n\npred_df &lt;- data.frame(점수 = score_range, 출석률 = avg_att)\npred_df$확률 &lt;- predict(model, newdata = pred_df, type = \"response\")\n\nplot(pred_df$점수, pred_df$확률, type = \"l\", lwd = 2, col = \"#0f3460\",\n     main = \"점수에 따른 합격 확률\", xlab = \"시험 점수\", ylab = \"합격 확률\",\n     las = 1, ylim = c(0, 1))\nabline(h = 0.5, lty = 2, col = \"red\")\n\n# 실제 데이터 포인트\nactual &lt;- as.numeric(students$합격 == \"합격\")\npoints(students$점수, jitter(actual, amount = 0.03),\n       col = ifelse(actual == 1, \"#28a745\", \"#dc3545\"),\n       pch = 16, cex = 0.6)\nlegend(\"topleft\",\n       legend = c(\"합격\", \"불합격\", \"예측 확률\", \"결정 경계\"),\n       col = c(\"#28a745\", \"#dc3545\", \"#0f3460\", \"red\"),\n       pch = c(16, 16, NA, NA), lty = c(NA, NA, 1, 2), lwd = 2,\n       bty = \"n\", cex = 0.9)"
+  },
+  {
+    "objectID": "posts/logistic-regression/index.html#다중-클래스로-확장",
+    "href": "posts/logistic-regression/index.html#다중-클래스로-확장",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
+    "section": "다중 클래스로 확장",
+    "text": "다중 클래스로 확장\n로지스틱 회귀는 기본적으로 이진 분류이지만, 다항 로지스틱 회귀로 확장할 수 있습니다.\n\n# iris 데이터로 3-class 분류\nlibrary(nnet)\n\niris_model &lt;- multinom(Species ~ ., data = iris, trace = FALSE)\n\n# 예측\npred &lt;- predict(iris_model, iris)\ntable(예측 = pred, 실제 = iris$Species)\n\n            실제\n예측       setosa versicolor virginica\n  setosa         50          0         0\n  versicolor      0         49         1\n  virginica       0          1        49\n\n# 정확도\ncat(sprintf(\"정확도: %.1f%%\\n\", mean(pred == iris$Species) * 100))\n\n정확도: 98.7%"
+  },
+  {
+    "objectID": "posts/logistic-regression/index.html#주의사항",
+    "href": "posts/logistic-regression/index.html#주의사항",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
+    "section": "주의사항",
+    "text": "주의사항\n\n1. 다중공선성 확인\n\n# 독립변수 간 상관관계\ncor(students[, c(\"점수\", \"출석률\")])\n\n              점수      출석률\n점수    1.00000000 -0.03557505\n출석률 -0.03557505  1.00000000\n\n\n상관계수가 0.8 이상이면 다중공선성을 의심해야 합니다.\n\n\n2. 선형성 가정\n로지스틱 회귀는 독립변수와 로그 오즈 간의 선형 관계를 가정합니다.\n\n\n3. 표본 크기\n일반적으로 각 범주별 최소 10~20개 이상의 관측치가 필요합니다."
+  },
+  {
+    "objectID": "posts/logistic-regression/index.html#선형-회귀-vs-로지스틱-회귀",
+    "href": "posts/logistic-regression/index.html#선형-회귀-vs-로지스틱-회귀",
+    "title": "R로 배우는 로지스틱 회귀분석 완전 가이드",
+    "section": "선형 회귀 vs 로지스틱 회귀",
+    "text": "선형 회귀 vs 로지스틱 회귀\n\n\n\n\n선형 회귀\n로지스틱 회귀\n\n\n\n\n종속변수\n연속형\n범주형 (0/1)\n\n\n함수\nlm()\nglm(family=binomial)\n\n\n출력\n예측값\n확률 (0~1)\n\n\n손실함수\nMSE\nLog Loss\n\n\n해석\n기울기 = 변화량\n오즈비 = 변화 배율\n\n\n예시\n매출 예측\n이탈 예측"
   },
   {
     "objectID": "about.html",
@@ -82,6 +159,13 @@
     "title": "소개",
     "section": "",
     "text": "한동대학교 기관연구(IR) 데이터 분석 블로그입니다.\nR, Python 등을 활용한 데이터 분석 방법론과 대학 행정 데이터 활용 사례를 공유합니다."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "IR Handong",
+    "section": "",
+    "text": "R로 배우는 로지스틱 회귀분석 완전 가이드\n\n\n\nR\n\n통계\n\n머신러닝\n\n\n\n이진 분류의 핵심, 로지스틱 회귀를 R 실습과 함께 처음부터 끝까지 정리합니다\n\n\n\n2026.04.08\n\n\n\n\n\n\n\n\n\n\nR의 apply 함수 패밀리 완전 정복\n\n\n\nR\n\n프로그래밍\n\n\n\napply, sapply, lapply, tapply, mapply의 차이점과 활용법\n\n\n\n2026.04.08\n\n\n\n\n\n\n\n\n\n\nR 자료구조 완전 정복: 벡터, 행렬, 데이터프레임, 리스트\n\n\n\nR\n\n프로그래밍\n\n\n\nR의 핵심 자료구조 4가지를 예제와 함께 정리합니다\n\n\n\n2026.04.08\n\n\n\n\n\n\n일치 없음"
   },
   {
     "objectID": "posts/r-apply-functions/index.html",
