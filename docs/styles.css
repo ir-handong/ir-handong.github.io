@@ -1,0 +1,4 @@
+/* Hide Quarto listing ::: rendering bug */
+#quarto-content .quarto-listing-container > p {
+  display: none;
+}

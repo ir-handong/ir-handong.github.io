@@ -1,0 +1,61 @@
+---
+title: "R의 apply 함수 패밀리 완전 정복"
+author: "ir-handong"
+date: "2026-04-08"
+categories: [R, 프로그래밍]
+description: "apply, sapply, lapply, tapply, mapply의 차이점과 활용법"
+---
+
+## apply 함수란?
+
+R에서 `apply` 함수 패밀리는 **반복문(for loop) 없이** 데이터에 함수를 적용할 수 있게 해주는 강력한 도구입니다.
+
+## 1. apply() — 행렬/데이터프레임용
+
+행 또는 열 단위로 함수를 적용합니다.
+
+- `MARGIN = 1`: 행 방향
+- `MARGIN = 2`: 열 방향
+
+```{r}
+mat <- matrix(1:12, nrow = 3)
+mat
+
+apply(mat, 1, sum)   # 행별 합계
+apply(mat, 2, mean)  # 열별 평균
+```
+
+## 2. sapply() — 결과를 벡터로
+
+```{r}
+nums <- list(a = 1:5, b = 6:10, c = 11:15)
+sapply(nums, mean)
+```
+
+## 3. lapply() — 결과를 리스트로
+
+```{r}
+lapply(nums, mean)
+```
+
+## 4. tapply() — 그룹별 집계
+
+```{r}
+tapply(iris$Sepal.Length, iris$Species, mean)
+```
+
+## 5. mapply() — 여러 인자를 동시에
+
+```{r}
+mapply(rep, x = 1:4, times = 4:1)
+```
+
+## 한눈에 비교
+
+| 함수 | 입력 | 출력 | 용도 |
+|------|------|------|------|
+| `apply` | 행렬 | 벡터/행렬 | 행/열 단위 연산 |
+| `sapply` | 벡터/리스트 | 벡터 | 간단한 반복 |
+| `lapply` | 벡터/리스트 | 리스트 | 안전한 반복 |
+| `tapply` | 벡터 + 팩터 | 벡터 | 그룹별 집계 |
+| `mapply` | 여러 벡터 | 벡터/리스트 | 다중 인자 |

@@ -1,0 +1,22 @@
+project:
+  type: website
+  output-dir: docs
+
+lang: ko
+
+website:
+  title: "My Blog"
+  site-url: https://ir-handong.github.io
+  navbar:
+    left:
+      - href: index.qmd
+        text: 블로그
+      - about.qmd
+    right:
+      - icon: github
+        href: https://github.com/ir-handong
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
